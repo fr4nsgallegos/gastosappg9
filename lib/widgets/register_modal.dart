@@ -36,7 +36,21 @@ class RegisterModal extends StatelessWidget {
             hint: "Ingresa la fecha",
             controller: _fechaController,
           ),
-          ItemTypeWidget(),
+          SizedBox(
+            height: 16,
+          ),
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            alignment: WrapAlignment.center,
+            children: [
+              ItemTypeWidget(),
+              ItemTypeWidget(),
+              ItemTypeWidget(),
+              ItemTypeWidget(),
+              ItemTypeWidget(),
+            ],
+          ),
         ],
       ),
     );
