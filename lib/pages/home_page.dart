@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:gastosappg9/widgets/item_gasto_widget.dart';
+import 'package:gastosappg9/widgets/register_modal.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   Widget buildBusquedaWidget() {
     return Padding(
       padding: const EdgeInsets.all(16.0),
@@ -28,6 +34,16 @@ class HomePage extends StatelessWidget {
     );
   }
 
+  showRegisterModal() {
+    showModalBottomSheet(
+      backgroundColor: Colors.transparent,
+      context: context,
+      builder: (BuildContext context) {
+        return RegisterModal();
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -40,6 +56,7 @@ class HomePage extends StatelessWidget {
                 InkWell(
                   onTap: () {
                     print("SE PRESIONA");
+                    showRegisterModal();
                   },
                   child: Container(
                     alignment: Alignment.center,
