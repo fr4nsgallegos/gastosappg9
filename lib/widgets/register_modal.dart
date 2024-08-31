@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gastosappg9/pages/data_general.dart';
+import 'package:gastosappg9/utils/data_general.dart';
 import 'package:gastosappg9/widgets/field_modal_widget.dart';
 import 'package:gastosappg9/widgets/item_type_widget.dart';
 
@@ -10,10 +10,10 @@ class RegisterModal extends StatefulWidget {
 
 class _RegisterModalState extends State<RegisterModal> {
   TextEditingController _tituloController = TextEditingController();
-
   TextEditingController _montoController = TextEditingController();
-
   TextEditingController _fechaController = TextEditingController();
+
+  String typeSelected = 'Alimentos';
 
   showDateTimePicker() async {
     DateTime? datepicker = await showDatePicker(
@@ -89,6 +89,13 @@ class _RegisterModalState extends State<RegisterModal> {
                 .map(
                   (e) => ItemTypeWidget(
                     data: e,
+                    isSelected: e["name"] == typeSelected,
+                    tap: () {
+                      typeSelected = e["name"];
+                      setState(
+                        () {},
+                      );
+                    },
                   ),
                 )
                 .toList(),
