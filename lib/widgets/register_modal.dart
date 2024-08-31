@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gastosappg9/pages/data_general.dart';
 import 'package:gastosappg9/widgets/field_modal_widget.dart';
 import 'package:gastosappg9/widgets/item_type_widget.dart';
 
@@ -84,13 +85,13 @@ class _RegisterModalState extends State<RegisterModal> {
             spacing: 8,
             runSpacing: 8,
             alignment: WrapAlignment.center,
-            children: [
-              ItemTypeWidget(),
-              ItemTypeWidget(),
-              ItemTypeWidget(),
-              ItemTypeWidget(),
-              ItemTypeWidget(),
-            ],
+            children: types
+                .map(
+                  (e) => ItemTypeWidget(
+                    data: e,
+                  ),
+                )
+                .toList(),
           ),
         ],
       ),

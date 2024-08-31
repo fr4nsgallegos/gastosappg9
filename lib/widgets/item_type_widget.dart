@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 
 class ItemTypeWidget extends StatelessWidget {
+  Map<String, dynamic> data;
+  ItemTypeWidget({
+    required this.data,
+  });
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -13,14 +18,16 @@ class ItemTypeWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Image.asset(
-            "assets/images/alimentos.webp",
+            "assets/images/${data["image"]}.webp",
             width: 40,
             height: 40,
           ),
           SizedBox(
             width: 8,
           ),
-          Text("Alimentos"),
+          Text(
+            data["name"],
+          ),
         ],
       ),
     );
