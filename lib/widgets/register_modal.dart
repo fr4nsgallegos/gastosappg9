@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gastosappg9/db/db_admin.dart';
 import 'package:gastosappg9/utils/data_general.dart';
 import 'package:gastosappg9/widgets/field_modal_widget.dart';
 import 'package:gastosappg9/widgets/item_type_widget.dart';
@@ -41,6 +42,41 @@ class _RegisterModalState extends State<RegisterModal> {
       print(_fechaController.text);
     });
     // print(datepicker);
+  }
+
+  _buildButtonAdd() {
+    return SizedBox(
+      width: double.infinity,
+      height: 40,
+      child: ElevatedButton(
+        child: Text(
+          "Añadir",
+          style: TextStyle(color: Colors.white),
+        ),
+        onPressed: () {
+          Map<String, dynamic> gastoMap = {
+            "title": _tituloController.text,
+            "price": _montoController.text,
+            "datetime": _fechaController.text,
+            "type": typeSelected,
+          };
+          DbAdmin().insertarGasto(gastoMap).then((value) {
+            if (value > 0) {
+              print("SE HA INGRESADO CORRECTAMENTE");
+            } else {
+              print("HUBO UN ERROR");
+            }
+            Navigator.pop(context);
+          });
+        },
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.black,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+        ),
+      ),
+    );
   }
 
   @override
@@ -100,6 +136,10 @@ class _RegisterModalState extends State<RegisterModal> {
                 )
                 .toList(),
           ),
+          SizedBox(
+            height: 16,
+          ),
+          _buildButtonAdd(),
         ],
       ),
     );

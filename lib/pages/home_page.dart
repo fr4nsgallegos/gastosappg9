@@ -9,6 +9,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<Map<String, dynamic>> gastos = [];
+
   Widget buildBusquedaWidget() {
     return Padding(
       padding: const EdgeInsets.all(16.0),
@@ -47,7 +49,21 @@ class _HomePageState extends State<HomePage> {
           child: RegisterModal(),
         );
       },
-    );
+    ).then((value) {
+      getDataFromDB();
+      setState(() {});
+    });
+  }
+
+  Future<void> getDataFromDB() async {
+    gastos = await DbAdmin().obtenerGastos();
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    getDataFromDB();
+    super.initState();
   }
 
   @override
@@ -127,7 +143,17 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         buildBusquedaWidget(),
-                        ItemGastoWidget(),
+                        // ItemGastoWidget(),
+                        Expanded(
+                          child: ListView.builder(
+                            itemCount: gastos.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return ItemGastoWidget(
+                                gastoData: gastos[index],
+                              );
+                            },
+                          ),
+                        )
                       ],
                     ),
                   ),

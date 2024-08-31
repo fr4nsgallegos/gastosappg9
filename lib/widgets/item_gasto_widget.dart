@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 
 class ItemGastoWidget extends StatelessWidget {
+  Map<String, dynamic> gastoData;
+
+  ItemGastoWidget({
+    required this.gastoData,
+  });
+
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.only(bottom: 8),
       decoration: BoxDecoration(
         color: Colors.black.withOpacity(0.05),
         borderRadius: BorderRadius.circular(16),
@@ -15,21 +22,21 @@ class ItemGastoWidget extends StatelessWidget {
           width: 40,
         ),
         title: Text(
-          "Cine",
+          gastoData["title"],
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w700,
           ),
         ),
         subtitle: Text(
-          "27/05/2024",
+          gastoData["datetime"],
           style: TextStyle(
             fontSize: 13,
             fontWeight: FontWeight.w400,
           ),
         ),
         trailing: Text(
-          "S/ 12.0",
+          "S/ ${gastoData["price"]}",
           style: TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w700,

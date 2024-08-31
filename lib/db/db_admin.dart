@@ -41,18 +41,18 @@ class DbAdmin {
   }
 
   // INSERTAR GASTOS
-  insertarGasto() async {
+  Future<int> insertarGasto(Map<String, dynamic> gasto) async {
     Database? db = await _checkDataBase();
-    int res = await db!.insert(
-      "GASTOS",
-      {
-        "title": "Curso flutter",
-        "price": 100.0,
-        "datetime": "31/08/2024",
-        "type": "Otros",
-      },
-    );
+    int res = await db!.insert("GASTOS", gasto
+        // {
+        //   "title": "Curso flutter",
+        //   "price": 100.0,
+        //   "datetime": "31/08/2024",
+        //   "type": "Otros",
+        // },
+        );
     print(res);
+    return res;
   }
 
   //OBTENER GASTOS
@@ -63,8 +63,8 @@ class DbAdmin {
     // List data =
     //     await db!.rawQuery("SELECT TITLE FROM GASTOS WHERE TYPE = 'Otros'");
     // List data = await db!.query("GASTOS", where: "TYPE='Alimentos'");
-
-    print(data);
+    return data;
+    // print(data);
   }
 
   // ELIMNAR GASTO
