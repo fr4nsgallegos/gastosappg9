@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:gastosappg9/models/gasto_model.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
@@ -41,16 +42,17 @@ class DbAdmin {
   }
 
   // INSERTAR GASTOS
-  Future<int> insertarGasto(Map<String, dynamic> gasto) async {
+  Future<int> insertarGasto(GastoModel gasto) async {
     Database? db = await _checkDataBase();
-    int res = await db!.insert("GASTOS", gasto
-        // {
-        //   "title": "Curso flutter",
-        //   "price": 100.0,
-        //   "datetime": "31/08/2024",
-        //   "type": "Otros",
-        // },
-        );
+    int res = await db!.insert(
+      "GASTOS", gasto.convertiraMap(),
+      // {
+      //   "title": "Curso flutter",
+      //   "price": 100.0,
+      //   "datetime": "31/08/2024",
+      //   "type": "Otros",
+      // },
+    );
     print(res);
     return res;
   }
@@ -59,11 +61,13 @@ class DbAdmin {
   obtenerGastos() async {
     Database? db = await _checkDataBase();
     List data = await db!.query("GASTOS");
+    List<GastoModel> gastosList =
+        data.map((e) => GastoModel.fromDB(e)).toList();
     // List data = await db!.query("GASTOS", columns: ["title", "price"]);
     // List data =
     //     await db!.rawQuery("SELECT TITLE FROM GASTOS WHERE TYPE = 'Otros'");
     // List data = await db!.query("GASTOS", where: "TYPE='Alimentos'");
-    return data;
+    return gastosList;
     // print(data);
   }
 

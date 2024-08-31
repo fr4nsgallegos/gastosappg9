@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gastosappg9/db/db_admin.dart';
+import 'package:gastosappg9/models/gasto_model.dart';
 import 'package:gastosappg9/utils/data_general.dart';
 import 'package:gastosappg9/widgets/field_modal_widget.dart';
 import 'package:gastosappg9/widgets/item_type_widget.dart';
@@ -54,15 +55,29 @@ class _RegisterModalState extends State<RegisterModal> {
           style: TextStyle(color: Colors.white),
         ),
         onPressed: () {
-          Map<String, dynamic> gastoMap = {
-            "title": _tituloController.text,
-            "price": _montoController.text,
-            "datetime": _fechaController.text,
-            "type": typeSelected,
-          };
-          DbAdmin().insertarGasto(gastoMap).then((value) {
+          GastoModel gasto = GastoModel(
+              title: _tituloController.text,
+              price: double.parse(_montoController.text),
+              datetime: _fechaController.text,
+              type: typeSelected);
+          // Map<String, dynamic> gastoMap = {
+          //   "title": _tituloController.text,
+          //   "price": _montoController.text,
+          //   "datetime": _fechaController.text,
+          //   "type": typeSelected,
+          // };
+          DbAdmin().insertarGasto(gasto).then((value) {
             if (value > 0) {
-              print("SE HA INGRESADO CORRECTAMENTE");
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  backgroundColor: Colors.cyan,
+                  behavior: SnackBarBehavior.floating,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  content: Text("Se ha registrado corretamente"),
+                ),
+              );
             } else {
               print("HUBO UN ERROR");
             }
@@ -90,57 +105,59 @@ class _RegisterModalState extends State<RegisterModal> {
           topRight: Radius.circular(35),
         ),
       ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text("Registra el gasto"),
-          SizedBox(
-            height: 16,
-          ),
-          FieldModalWidget(
-            hint: "Ingresa el título",
-            controller: _tituloController,
-          ),
-          FieldModalWidget(
-            hint: "Ingresa el monto",
-            controller: _montoController,
-            isNumberKeyBoard: true,
-          ),
-          FieldModalWidget(
-            hint: "Ingresa la fecha",
-            controller: _fechaController,
-            isDatePicker: true,
-            function: () {
-              showDateTimePicker();
-            },
-          ),
-          SizedBox(
-            height: 16,
-          ),
-          Wrap(
-            spacing: 8,
-            runSpacing: 8,
-            alignment: WrapAlignment.center,
-            children: types
-                .map(
-                  (e) => ItemTypeWidget(
-                    data: e,
-                    isSelected: e["name"] == typeSelected,
-                    tap: () {
-                      typeSelected = e["name"];
-                      setState(
-                        () {},
-                      );
-                    },
-                  ),
-                )
-                .toList(),
-          ),
-          SizedBox(
-            height: 16,
-          ),
-          _buildButtonAdd(),
-        ],
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text("Registra el gasto"),
+            SizedBox(
+              height: 16,
+            ),
+            FieldModalWidget(
+              hint: "Ingresa el título",
+              controller: _tituloController,
+            ),
+            FieldModalWidget(
+              hint: "Ingresa el monto",
+              controller: _montoController,
+              isNumberKeyBoard: true,
+            ),
+            FieldModalWidget(
+              hint: "Ingresa la fecha",
+              controller: _fechaController,
+              isDatePicker: true,
+              function: () {
+                showDateTimePicker();
+              },
+            ),
+            SizedBox(
+              height: 16,
+            ),
+            Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              alignment: WrapAlignment.center,
+              children: types
+                  .map(
+                    (e) => ItemTypeWidget(
+                      data: e,
+                      isSelected: e["name"] == typeSelected,
+                      tap: () {
+                        typeSelected = e["name"];
+                        setState(
+                          () {},
+                        );
+                      },
+                    ),
+                  )
+                  .toList(),
+            ),
+            SizedBox(
+              height: 16,
+            ),
+            _buildButtonAdd(),
+          ],
+        ),
       ),
     );
   }

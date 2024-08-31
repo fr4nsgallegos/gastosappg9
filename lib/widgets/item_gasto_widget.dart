@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:gastosappg9/models/gasto_model.dart';
 
 class ItemGastoWidget extends StatelessWidget {
-  Map<String, dynamic> gastoData;
+  // Map<String, dynamic> gastoData;
+  GastoModel gastoData;
 
   ItemGastoWidget({
     required this.gastoData,
@@ -22,21 +24,21 @@ class ItemGastoWidget extends StatelessWidget {
           width: 40,
         ),
         title: Text(
-          gastoData["title"],
+          gastoData.title,
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w700,
           ),
         ),
         subtitle: Text(
-          gastoData["datetime"],
+          gastoData.datetime,
           style: TextStyle(
             fontSize: 13,
             fontWeight: FontWeight.w400,
           ),
         ),
         trailing: Text(
-          "S/ ${gastoData["price"]}",
+          "S/ ${gastoData.price}",
           style: TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w700,
