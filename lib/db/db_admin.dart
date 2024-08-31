@@ -68,6 +68,11 @@ class DbAdmin {
   }
 
   // ELIMNAR GASTO
+  delGasto() async {
+    Database? db = await _checkDataBase();
+    int res = await db!.delete("GASTOS", where: 'id=1');
+    print(res);
+  }
 
   // ACTUALIZAR GASTO
   updGasto() async {

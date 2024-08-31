@@ -58,7 +58,8 @@ class _HomePageState extends State<HomePage> {
           // DbAdmin dbAdmin = DbAdmin();
           // dbAdmin.checkDataBase();
           // DbAdmin().obtenerGastos();
-          DbAdmin().updGasto();
+          // DbAdmin().updGasto();
+          DbAdmin().delGasto();
           // dbAdmin.insertarGasto();
         }),
         body: Stack(
