@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gastosappg9/db/db_admin.dart';
 import 'package:gastosappg9/widgets/item_gasto_widget.dart';
 import 'package:gastosappg9/widgets/register_modal.dart';
 
@@ -53,6 +54,12 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        floatingActionButton: FloatingActionButton(onPressed: () {
+          DbAdmin dbAdmin = DbAdmin();
+          // dbAdmin.checkDataBase();
+          dbAdmin.obtenerGastos();
+          // dbAdmin.insertarGasto();
+        }),
         body: Stack(
           children: [
             Column(
