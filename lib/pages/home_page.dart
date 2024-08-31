@@ -55,9 +55,10 @@ class _HomePageState extends State<HomePage> {
     return SafeArea(
       child: Scaffold(
         floatingActionButton: FloatingActionButton(onPressed: () {
-          DbAdmin dbAdmin = DbAdmin();
+          // DbAdmin dbAdmin = DbAdmin();
           // dbAdmin.checkDataBase();
-          dbAdmin.obtenerGastos();
+          // DbAdmin().obtenerGastos();
+          DbAdmin().updGasto();
           // dbAdmin.insertarGasto();
         }),
         body: Stack(

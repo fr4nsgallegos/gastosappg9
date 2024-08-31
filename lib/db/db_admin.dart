@@ -7,7 +7,14 @@ import 'package:sqflite/sqflite.dart';
 class DbAdmin {
   Database? myDatabase;
 
-  Future<Database?> checkDataBase() async {
+  static final DbAdmin _instance = DbAdmin._();
+  DbAdmin._();
+
+  factory DbAdmin() {
+    return _instance;
+  }
+
+  Future<Database?> _checkDataBase() async {
     if (myDatabase == null) {
       myDatabase = await _initDatabase();
     }
@@ -35,14 +42,14 @@ class DbAdmin {
 
   // INSERTAR GASTOS
   insertarGasto() async {
-    Database? db = await checkDataBase();
+    Database? db = await _checkDataBase();
     int res = await db!.insert(
       "GASTOS",
       {
-        "title": "Compras de mercado",
-        "price": 256.5,
+        "title": "Curso flutter",
+        "price": 100.0,
         "datetime": "31/08/2024",
-        "type": "Alimentos",
+        "type": "Otros",
       },
     );
     print(res);
@@ -50,12 +57,29 @@ class DbAdmin {
 
   //OBTENER GASTOS
   obtenerGastos() async {
-    Database? db = await checkDataBase();
+    Database? db = await _checkDataBase();
     List data = await db!.query("GASTOS");
+    // List data = await db!.query("GASTOS", columns: ["title", "price"]);
+    // List data =
+    //     await db!.rawQuery("SELECT TITLE FROM GASTOS WHERE TYPE = 'Otros'");
+    // List data = await db!.query("GASTOS", where: "TYPE='Alimentos'");
+
     print(data);
   }
 
   // ELIMNAR GASTO
 
   // ACTUALIZAR GASTO
+  updGasto() async {
+    Database? db = await _checkDataBase();
+    int res = await db!.update(
+      "GASTOS",
+      {
+        "title": "actualizandoo",
+        "price": 0,
+        "type": "Banco",
+      },
+      where: "id=1",
+    );
+  }
 }
