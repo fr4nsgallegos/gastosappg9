@@ -16,10 +16,30 @@ class _RegisterModalState extends State<RegisterModal> {
 
   showDateTimePicker() async {
     DateTime? datepicker = await showDatePicker(
-      context: context,
-      firstDate: DateTime(2022),
-      lastDate: DateTime(2030),
-    );
+        context: context,
+        firstDate: DateTime(2022),
+        lastDate: DateTime(2030),
+        initialDate: DateTime.now(),
+        builder: (BuildContext context, Widget? child) {
+          return Theme(
+              data: ThemeData.light().copyWith(
+                dialogTheme: DialogTheme(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25),
+                  ),
+                ),
+                colorScheme: ColorScheme.light(
+                  primary: Colors.black,
+                ),
+              ),
+              child: child!);
+        }).then((value) {
+      // print(value);
+      _fechaController.text =
+          value == null ? "" : value.toString().substring(0, 10);
+      print(_fechaController.text);
+    });
+    // print(datepicker);
   }
 
   @override
