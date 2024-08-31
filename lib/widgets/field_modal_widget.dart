@@ -3,9 +3,15 @@ import 'package:flutter/material.dart';
 class FieldModalWidget extends StatelessWidget {
   String hint;
   TextEditingController controller;
+  bool isNumberKeyBoard;
+  bool isDatePicker;
+  VoidCallback? function;
   FieldModalWidget({
     required this.hint,
     required this.controller,
+    this.isNumberKeyBoard = false,
+    this.isDatePicker = false,
+    this.function,
   });
 
   @override
@@ -13,6 +19,10 @@ class FieldModalWidget extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(bottom: 16),
       child: TextField(
+        onTap: function,
+        readOnly: isDatePicker,
+        keyboardType:
+            isNumberKeyBoard ? TextInputType.number : TextInputType.text,
         controller: controller,
         decoration: InputDecoration(
           hintText: hint,

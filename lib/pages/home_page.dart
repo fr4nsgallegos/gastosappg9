@@ -36,10 +36,15 @@ class _HomePageState extends State<HomePage> {
 
   showRegisterModal() {
     showModalBottomSheet(
+      isScrollControlled: true,
       backgroundColor: Colors.transparent,
       context: context,
       builder: (BuildContext context) {
-        return RegisterModal();
+        return Padding(
+          padding:
+              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+          child: RegisterModal(),
+        );
       },
     );
   }
