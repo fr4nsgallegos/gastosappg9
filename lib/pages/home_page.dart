@@ -72,14 +72,14 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        floatingActionButton: FloatingActionButton(onPressed: () {
-          // DbAdmin dbAdmin = DbAdmin();
-          // dbAdmin.checkDataBase();
-          // DbAdmin().obtenerGastos();
-          // DbAdmin().updGasto();
-          DbAdmin().delGasto();
-          // dbAdmin.insertarGasto();
-        }),
+        // floatingActionButton: FloatingActionButton(onPressed: () {
+        //   // DbAdmin dbAdmin = DbAdmin();
+        //   // dbAdmin.checkDataBase();
+        //   // DbAdmin().obtenerGastos();
+        //   // DbAdmin().updGasto();
+        //   DbAdmin().delGasto();
+        //   // dbAdmin.insertarGasto();
+        // }),
         body: Stack(
           children: [
             Column(
