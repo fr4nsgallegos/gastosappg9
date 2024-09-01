@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gastosappg9/db/db_admin.dart';
+import 'package:gastosappg9/generated/l10n.dart';
 import 'package:gastosappg9/models/gasto_model.dart';
 import 'package:gastosappg9/widgets/item_gasto_widget.dart';
 import 'package:gastosappg9/widgets/register_modal.dart';
@@ -146,6 +147,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                         buildBusquedaWidget(),
                         // ItemGastoWidget(),
+                        Text(S.of(context).helloAlguien("Jhonny")),
                         Expanded(
                           child: ListView.builder(
                             itemCount: gastos.length,
